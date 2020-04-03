@@ -1,7 +1,7 @@
 /***************************************************************************
  *                                                                         *
- *   This Predix services API was created by by Indeema Software Inc.      *
- *   QPredix SDK is under MIT license so you are free to use it.           *
+ *   This Quwi services API was created by by Indeema Software Inc.      *
+ *   Quwi SDK is under MIT license so you are free to use it.           *
  *   https://indeema.com                                                   *
  *                                                                         *
  *   In case if you have any issues or comments, please conntact us:       *
@@ -9,8 +9,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef QPREDIXCORE_H
-#define QPREDIXCORE_H
+#ifndef QQUWICORE_H
+#define QUWICORE_H
 
 #include <QObject>
 #include <QNetworkRequest>
@@ -46,9 +46,9 @@ public:
     explicit QuwiCore(QString url, QObject *parent = 0);
     ~QuwiCore();
 
-    //! Basic Predix API url
+    //! Basic Quwi API url
     QString url() const;
-    //! Sets basic Predix API url
+    //! Sets basic Quwi API url
     void setUrl(const QString &url);
 
     //! Version of API. By default the value os "v1"
@@ -125,4 +125,4 @@ private:
     QString mToken;
 };
 
-#endif // QPREDIXCORE_H
+#endif // QUWICORE_H

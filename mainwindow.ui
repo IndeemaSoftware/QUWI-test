@@ -14,88 +14,89 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>80</y>
-      <width>201</width>
-      <height>191</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QLineEdit" name="lineEmail">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;email&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="placeholderText">
-        <string>email</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="linePassword">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;password&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="placeholderText">
-        <string>password</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="loginButton">
-       <property name="text">
-        <string>Login</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="logoutButton">
-       <property name="text">
-        <string>Logout</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="labelWarning">
-       <property name="styleSheet">
-        <string notr="true">color:red;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="widget_2" native="true">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>120</y>
-      <width>120</width>
-      <height>80</height>
-     </rect>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QWidget" name="widget" native="true">
+      <property name="maximumSize">
+       <size>
+        <width>275</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLineEdit" name="lineEmail">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;email&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>volodymyr.shevchyk@indeema.com</string>
+         </property>
+         <property name="placeholderText">
+          <string>email</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="linePassword">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;password&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>qwerty123</string>
+         </property>
+         <property name="placeholderText">
+          <string>password</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="loginButton">
+         <property name="text">
+          <string>Login</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="logoutButton">
+         <property name="text">
+          <string>Logout</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="labelWarning">
+         <property name="styleSheet">
+          <string notr="true">color:red;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QTableView" name="tableView"/>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

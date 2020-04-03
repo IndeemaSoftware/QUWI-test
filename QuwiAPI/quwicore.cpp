@@ -76,6 +76,10 @@ QNetworkRequest QuwiCore::request(QUrl url)
 {
     QNetworkRequest lRequest(url);
     lRequest.setRawHeader("content-type", "application/json");
+    if (!mToken.isEmpty()) {
+        QString lValue = "Bearer " + mToken;
+        lRequest.setRawHeader("Authorization", lValue.toUtf8());
+    }
 
     return lRequest;
 }

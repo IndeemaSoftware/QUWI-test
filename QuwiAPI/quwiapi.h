@@ -2,6 +2,9 @@
 #define QUWIAPI_H
 
 #include "quwicore.h"
+#include "quwiproject.h"
+
+#include <QList>
 
 class QuwiAPI : public QuwiCore
 {
@@ -12,6 +15,8 @@ public:
     void login(QString user, QString passwd);
     void logout();
 
+    void getProjects();
+
 private:
     void handleLoginResponce(QByteArray);
 
@@ -19,6 +24,8 @@ signals:
     void loginSucced();
     void loginFailed(QString);
     void logoutSucced();
+
+    void projectsRecived(QList<QuwiProject>*);
 
 protected slots:
     void authenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator);

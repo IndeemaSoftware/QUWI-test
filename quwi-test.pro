@@ -16,20 +16,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    QuwiAPI/quwiproject.cpp \
     main.cpp \
     mainwindow.cpp \
-    quwiapi.cpp \
-    quwiapiparser.cpp \
-    quwicore.cpp
+    QuwiAPI/quwiapi.cpp \
+    QuwiAPI/quwiapiparser.cpp \
+    QuwiAPI/quwicore.cpp
 
 HEADERS += \
+    QuwiAPI/quwiproject.h \
     mainwindow.h \
-    quwiapi.h \
-    quwiapiparser.h \
-    quwicore.h
+    QuwiAPI/quwiapi.h \
+    QuwiAPI/quwiapiparser.h \
+    QuwiAPI/quwicore.h
 
 FORMS += \
     mainwindow.ui
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
