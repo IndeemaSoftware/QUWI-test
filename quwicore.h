@@ -61,12 +61,10 @@ public:
     */
     void setAPIVersion(const QString &aPIVersion);
 
-private:
+protected:
     QString getToken() const;
 
     void setToken(const QString &token);
-
-protected:
     //! Forms url from base url (set in class constructor) + method url
     /*!
         \return is used to simplify process of url creation

@@ -5,10 +5,20 @@
 
 class QuwiAPI : public QuwiCore
 {
+    Q_OBJECT
 public:
     QuwiAPI(QString url, QuwiCore *parent = 0);
 
     void login(QString user, QString passwd);
+    void logout();
+
+private:
+    void handleLoginResponce(QByteArray);
+
+signals:
+    void loginSucced();
+    void loginFailed(QString);
+    void logoutSucced();
 
 protected slots:
     void authenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator);

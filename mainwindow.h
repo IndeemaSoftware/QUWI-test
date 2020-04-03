@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 class QuwiAPI;
+class QMovie;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,12 +18,20 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    QuwiAPI *mAPI;
-
 private slots:
+    void cleanWarningMessage();
     void login();
+    void loginSucced();
+    void loginFailed(QString);
+    void logout();
+    void logoutSucced();
+
+    void frameChanged();
+    void stopFrames();
 
 private:
     Ui::MainWindow *ui;
+    QuwiAPI *mAPI;
+    QMovie *mLoading;
 };
 #endif // MAINWINDOW_H
