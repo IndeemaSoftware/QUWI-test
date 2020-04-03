@@ -16,6 +16,7 @@ public:
     void logout();
 
     void getProjects();
+    void updateProject(QuwiProject);
 
 private:
     void handleLoginResponce(QByteArray);

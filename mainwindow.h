@@ -9,6 +9,7 @@
 class QuwiAPI;
 class QMovie;
 class QStandardItemModel;
+class QSignalMapper;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,11 +38,17 @@ private slots:
     void logoutSucced();
 
     void projectsReceived(QList<QuwiProject>*);
+    void updateProjectName(int id);
+
+signals:
+    void updateProject(int);
+
 private:
     Ui::MainWindow *ui;
     QuwiAPI *mAPI;
     QMovie *mLoading;
     QList<QuwiProject> *mProjectList;
     QStandardItemModel *mModel;
+    QSignalMapper *mSignalMapper; //is used to set id for each button in table
 };
 #endif // MAINWINDOW_H

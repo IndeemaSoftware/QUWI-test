@@ -18,6 +18,22 @@ QByteArray QuwiAPIParser::loginCredentialsToJson(QString email, QString passwd)
     return doc.toJson();
 }
 
+QByteArray QuwiAPIParser::projectToJson(QuwiProject project)
+{
+    QJsonObject object;
+
+    object["id"] = project.id();
+    object["name"] = project.name();
+    object["uid"] = project.uid();
+    object["logo_url"] = project.logoUrl().toString();
+    object["position"] = project.position();
+    object["is_active"] = project.isActive();
+    object["has_starred"] = project.hasStarred();
+
+    QJsonDocument doc(object);
+    return doc.toJson();
+}
+
 QList<QuwiProject> *QuwiAPIParser::parseProjects(QByteArray data)
 {
     QList<QuwiProject> *lList = new QList<QuwiProject>();

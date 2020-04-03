@@ -111,6 +111,11 @@ protected:
         \return QNetworkRequest with prefilled headers
     */
     QNetworkRequest request(QUrl url);
+    //! Forms request with standart headers
+    /*!
+        \return QNetworkRequest with prefilled headers
+    */
+    QNetworkRequest requestFormData(QUrl url, QByteArray data, int size);
     //! Server url for provided API version
     /*!
         \return Server url for provided API version

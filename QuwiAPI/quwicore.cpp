@@ -84,6 +84,21 @@ QNetworkRequest QuwiCore::request(QUrl url)
     return lRequest;
 }
 
+QNetworkRequest QuwiCore::requestFormData(QUrl url, QByteArray data, int size)
+{
+    QNetworkRequest lRequest(url);
+    lRequest.setRawHeader("content-type", "multipart/form-data; boundary="+data );
+
+    if (!mToken.isEmpty()) {
+        QString lValue = "Bearer " + mToken;
+        lRequest.setRawHeader("Authorization", lValue.toUtf8());
+    }
+    lRequest.setHeader(QNetworkRequest::ContentLengthHeader, QByteArray::number(size));
+
+    return lRequest;
+}
+
+
 QByteArray QuwiCore::serverUrl(QByteArray version)
 {
     QByteArray rServerUrl = url().toUtf8();

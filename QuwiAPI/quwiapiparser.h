@@ -13,6 +13,7 @@ public:
 
     //generate jsons
     static QByteArray loginCredentialsToJson(QString parent, QString child);
+    static QByteArray projectToJson(QuwiProject projects);
 
     //parse jsons
     static QList<QuwiProject> *parseProjects(QByteArray);

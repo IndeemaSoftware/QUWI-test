@@ -8,6 +8,7 @@
 #include <QMovie>
 #include <QStandardItemModel>
 #include <QModelIndex>
+#include <QSignalMapper>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,6 +23,9 @@ MainWindow::MainWindow(QWidget *parent)
                               QRegularExpression::CaseInsensitiveOption);
     ui->lineEmail->setValidator(new QRegularExpressionValidator(rx, this));
 
+    mSignalMapper = new QSignalMapper(this);
+    connect(mSignalMapper, SIGNAL(mapped(int)), this, SIGNAL(updateProject(int)));
+
     mLoading = new QMovie(ui->loginButton);
     mLoading->setFileName(":/assets/assets/CWjOv.gif");
     connect(mLoading, SIGNAL(frameChanged(int )), this, SLOT(frameChanged()));
@@ -34,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->logoutButton, SIGNAL(clicked()), this, SLOT(logout()));
     connect(ui->lineEmail, SIGNAL(textChanged(const QString)), this, SLOT(cleanWarningMessage()));
     connect(ui->linePassword, SIGNAL(textChanged(const QString)), this, SLOT(cleanWarningMessage()));
+
+    connect(this, SIGNAL(updateProject(int)), this, SLOT(updateProjectName(int)));
 
     QString lBasicURL = "https://api.quwi.com";
     //initializing apiclass
@@ -68,15 +74,13 @@ void MainWindow::initTabelModel(int rows)
         delete mModel;
     }
 
-    mModel = new QStandardItemModel(rows, 4);
+    mModel = new QStandardItemModel(rows, 3);
     QStandardItem *it = new QStandardItem(QObject::tr("ID"));
     mModel->setHorizontalHeaderItem(0,it);
     QStandardItem *it1 = new QStandardItem(QObject::tr("Name"));
     mModel->setHorizontalHeaderItem(1,it1);
-    QStandardItem *it2 = new QStandardItem(QObject::tr("Logo"));
-    mModel->setHorizontalHeaderItem(2,it2);
-    QStandardItem *it3 = new QStandardItem(QObject::tr("UID"));
-    mModel->setHorizontalHeaderItem(3,it3);
+    QStandardItem *it3 = new QStandardItem(QObject::tr(""));
+    mModel->setHorizontalHeaderItem(2,it3);
 
     ui->tableView->setModel(mModel);
     ui->tableView->show();
@@ -145,22 +149,36 @@ void MainWindow::projectsReceived(QList<QuwiProject> *projectsList)
 
     initTabelModel(projectsList->size());
 
-    int row = 0;
+    int raw = 0;
     foreach (QuwiProject project, *projectsList) {
-        QModelIndex index = mModel->index(row, 0, QModelIndex());
-        row++;
+        QModelIndex index = mModel->index(raw, 0, QModelIndex());
+
         qDebug() << project.id();
         mModel->setData(index, project.id());
 
-        index = mModel->index(row, 1, QModelIndex());
+        index = mModel->index(raw, 1, QModelIndex());
         mModel->setData(index, project.name());
 
+        index = mModel->index(raw, 2, QModelIndex());
 
-        index = mModel->index(row, 2, QModelIndex());
-        mModel->setData(index, project.logoUrl());
+        QPushButton *lButton = new QPushButton("Update");
+        connect(lButton, SIGNAL(clicked()), mSignalMapper, SLOT(map()));
+        mSignalMapper->setMapping(lButton, raw);
+        ui->tableView->setIndexWidget(index, lButton);
 
-        index = mModel->index(row, 3, QModelIndex());
-        mModel->setData(index, project.uid());
+        raw++;
+    }
+}
+
+void MainWindow::updateProjectName(int id)
+{
+    if (mProjectList != nullptr) {
+        QModelIndex index = mModel->index(id, 1, QModelIndex());
+        QuwiProject lProject = mProjectList->at(id);
+        lProject.setName(mModel->data(index).toString());
+        mProjectList->replace(id, lProject);
+
+        mAPI->updateProject(lProject);
     }
 }
 

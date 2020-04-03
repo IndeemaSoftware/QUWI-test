@@ -28,6 +28,9 @@ public:
     int id() const;
     void setId(int id);
 
+    QList<int> users() const;
+    void setUsers(const QList<int> &users);
+
 private:
     int mId;
     QString mName;
@@ -36,6 +39,7 @@ private:
     int mPosition;
     bool mIsActive;
     bool mHasStarred;
+    QList<int> mUsers;
 };
 
 #endif // QUWIPROJECT_H

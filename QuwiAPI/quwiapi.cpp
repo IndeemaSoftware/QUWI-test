@@ -6,10 +6,12 @@
 #include <QNetworkReply>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QUrlQuery>
 
 //please always start with / and finish with /
-#define CMD_LOGIN       "/auth/login/"
-#define CMD_PROJECTS    "/projects/"
+#define CMD_LOGIN           "/auth/login/"
+#define CMD_PROJECTS        "/projects/"
+#define CMD_PROJECT_UPDATE  "/projects-manage/update/"
 
 QuwiAPI::QuwiAPI(QString url, QuwiCore *parent) : QuwiCore(url, parent)
 {
@@ -40,6 +42,28 @@ void QuwiAPI::getProjects()
     QNetworkRequest lRequest(request(lServiceURL));
 
     mgr()->get(lRequest);
+}
+
+void QuwiAPI::updateProject(QuwiProject project)
+{
+    QUrl lServiceURL(formUrl(CMD_PROJECT_UPDATE, APIVersion()) + "?id=" + QString::number(project.id()));
+
+    qDebug() << lServiceURL.toString();
+    QMap<QString, QString> lMap;
+    lMap["name"] = project.name();
+
+    QByteArray postData,boundary="1BEF0A57BE110FD467A"; //
+    postData.append("--"+boundary+"\r\n");// //
+    postData.append("Content-Disposition: form-data; name=\"");
+    postData.append("name");
+    postData.append("\"\r\n\r\n"); //
+    postData.append(project.name());
+    postData.append("\r\n");  //
+    postData.append("--"+boundary+"--\r\n");
+
+    QNetworkRequest lRequest(requestFormData(lServiceURL, boundary, postData.length()));
+
+    mgr()->post(lRequest, postData);
 }
 
 //private functions

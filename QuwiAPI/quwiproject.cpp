@@ -69,3 +69,13 @@ void QuwiProject::setId(int id)
 {
     mId = id;
 }
+
+QList<int> QuwiProject::users() const
+{
+    return mUsers;
+}
+
+void QuwiProject::setUsers(const QList<int> &users)
+{
+    mUsers = users;
+}
