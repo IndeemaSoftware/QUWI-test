@@ -72,16 +72,16 @@ void QuwiAPI::handleLoginResponce(QByteArray data)
     QJsonDocument document = QJsonDocument::fromJson(data);
     QJsonObject json = document.object();
 
-//    qDebug() << data;
-//    qDebug() << json.value("first_errors");
-
-    if (json.value("first_errors") == QJsonValue::Undefined) {
+    if (data.isEmpty()) {
+        emit error("No data received from server");
+    } else if (json.value("first_errors") == QJsonValue::Undefined) {
         QString lToken = json["token"].toString();
         if (!lToken.isEmpty()) {
             setToken(lToken);
             emit loginSucced();
         }
     } else {
+        qDebug() << "Login failed";
         emit loginFailed("Please check if entered credentials where correct");
     }
 }
@@ -116,7 +116,13 @@ void QuwiAPI::handleResponse(QNetworkReply *reply)
         }
     } else {
         if (QString(CMD_LOGIN).contains(getCommand(reply))) {
-            handleLoginResponce(lResponse);
+            if (lResponse.isEmpty()) {
+                emit error(reply->errorString());
+            } else {
+                handleLoginResponce(lResponse);
+            }
+        } else {
+            emit error(reply->errorString());
         }
     }
 }

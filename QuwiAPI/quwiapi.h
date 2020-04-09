@@ -28,6 +28,8 @@ signals:
 
     void projectsRecived(QList<QuwiProject>*);
 
+    void error(QString);
+
 protected slots:
     void authenticationRequired(QNetworkReply *reply, QAuthenticator *authenticator);
     void sslErrors(QNetworkReply *reply, const QList<QSslError> &errors);

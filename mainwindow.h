@@ -40,6 +40,8 @@ private slots:
     void projectsReceived(QList<QuwiProject>*);
     void updateProjectName(int id);
 
+    void apiCallError(QString);
+
 signals:
     void updateProject(int);
 

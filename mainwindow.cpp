@@ -9,6 +9,7 @@
 #include <QStandardItemModel>
 #include <QModelIndex>
 #include <QSignalMapper>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -51,6 +52,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(mAPI, SIGNAL(logoutSucced()), this, SLOT(logoutSucced()));
 
     connect(mAPI, SIGNAL(projectsRecived(QList<QuwiProject>*)), this, SLOT(projectsReceived(QList<QuwiProject>*)));
+
+    connect(mAPI, SIGNAL(error(QString)), this, SLOT(apiCallError(QString)));
 }
 
 MainWindow::~MainWindow()
@@ -180,6 +183,15 @@ void MainWindow::updateProjectName(int id)
 
         mAPI->updateProject(lProject);
     }
+}
+
+void MainWindow::apiCallError(QString msg)
+{
+    stopFrames();
+    logout();
+    QMessageBox msgBox;
+    msgBox.setText(msg);
+    msgBox.exec();
 }
 
 void MainWindow::frameChanged()
