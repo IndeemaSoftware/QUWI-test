@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets positioning location charts
+QT += qml quick widgets positioning location
 CONFIG += c++11
 
 SOURCES += \
