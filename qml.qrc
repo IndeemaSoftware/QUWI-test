@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/ContentView/Dashboard/ProjectsView.qml</file>
+        <file>qml/TopPanel/TopPanel.qml</file>
+        <file>qml/TopPanel/MenuButton.qml</file>
+        <file>qml/ContentView/ContentView.qml</file>
+        <file>qml/CustomComponents/PanelButton.qml</file>
+        <file>qml/ContentView/Login/LoginView.qml</file>
+        <file>qml/ContentView/Login/LoginTextArea.qml</file>
+        <file>qml/ContentView/Dashboard/ProjectModel.qml</file>
+        <file>qml/ContentView/Dashboard/EditProjectView.qml</file>
+    </qresource>
+</RCC>

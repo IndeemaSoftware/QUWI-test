@@ -1,5 +1,14 @@
 <RCC>
-    <qresource prefix="/assets">
-        <file>assets/CWjOv.gif</file>
+    <qresource prefix="/">
+        <file>resources/buttons/button_pressed.png</file>
+        <file>resources/buttons/button_normal.png</file>
+        <file>resources/buttons/button_hover.png</file>
+        <file>resources/login/input.png</file>
+        <file>resources/login/warning_input.png</file>
+        <file>resources/login/warning_icon.png</file>
+        <file>resources/login/login_normal_button.png</file>
+        <file>resources/login/login_pressed_button.png</file>
+        <file>resources/login/login_hover_button.png</file>
+        <file>resources/quwi-logo.png</file>
     </qresource>
 </RCC>

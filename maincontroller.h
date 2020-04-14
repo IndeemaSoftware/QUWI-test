@@ -1,37 +1,32 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef MAINCONTROLLER_H
+#define MAINCONTROLLER_H
 
-#include "QuwiAPI/quwiproject.h"
-
+#include <QObject>
 #include <QMainWindow>
 #include <QList>
 
+#include "QuwiAPI/quwiproject.h"
+
 class QuwiAPI;
-class QMovie;
 class QStandardItemModel;
 class QSignalMapper;
+class QQmlApplicationEngine;
+class QQuickItem;
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
-
-class MainWindow : public QMainWindow
+class MainController : public QObject
 {
     Q_OBJECT
-
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainController(QObject *parent = nullptr);
+
+    void setEngine(QQmlApplicationEngine *engine);
 
     void getProjects();
-    void initTabelModel(int);
 
 private slots:
     void cleanWarningMessage();
-    void frameChanged();
-    void stopFrames();
 
-    void login();
+    void login(QString, QString);
     void loginSucced();
     void loginFailed(QString);
     void logout();
@@ -44,13 +39,15 @@ private slots:
 
 signals:
     void updateProject(int);
-
 private:
-    Ui::MainWindow *ui;
+    QQmlApplicationEngine *mEngine;
+    QQuickItem *mLoginView;
+    QQuickItem *mProjectsView;
+
     QuwiAPI *mAPI;
-    QMovie *mLoading;
     QList<QuwiProject> *mProjectList;
     QStandardItemModel *mModel;
     QSignalMapper *mSignalMapper; //is used to set id for each button in table
 };
-#endif // MAINWINDOW_H
+
+#endif // MAINCONTROLLER_H

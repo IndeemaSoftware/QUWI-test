@@ -50,7 +50,7 @@ QList<QuwiProject> *QuwiAPIParser::parseProjects(QByteArray data)
             lProject.setName(val.toObject().value("name").toString());
             lProject.setLogoUrl(QUrl(val.toObject().value("logo_url").toString()));
             lProject.setPosition(val.toObject().value("position").toInt());
-            lProject.setIsActive(val.toObject().value("is_active").toBool());
+            lProject.setIsActive(val.toObject().value("is_active").toInt() == 1? true:false);
             lProject.setHasStarred(val.toObject().value("has_starred").toBool());
 
             lList->append(lProject);
