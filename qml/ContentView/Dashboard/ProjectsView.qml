@@ -8,18 +8,34 @@ TableView {
     columnSpacing: 1
     topMargin: 20
     leftMargin: projectsView.width/2 -275
-    rowSpacing: 5
+    rowSpacing: 10
     clip: true
     contentWidth: 550
+
+    property alias data: projectList
 
     property int index: -1
 
     signal projectPressed
 
+    signal updateProjectName(int id, string newName)
+    signal updateMessage(string msg)
+
     ListModel { id: projectList }
 
     function clearProjectsList() {
         projectList.clear();
+    }
+
+    function updateProjectMessage(msg) {
+        projectsView.updateMessage(msg)
+    }
+
+    function updateName(name) {
+        console.log("Update project name");
+        console.log(index);
+        console.log(name);
+        projectsView.updateProjectName(index, name);
     }
 
     function updateProjectList(name, logo, is_active) {

@@ -9,18 +9,14 @@ SOURCES += \
     QuwiAPI/quwiapi.cpp \
     QuwiAPI/quwiapiparser.cpp \
     QuwiAPI/quwicore.cpp \
-    maincontroller.cpp \
-    quwidatamodel.cpp \
-    quwiprojectmodel.cpp
+    maincontroller.cpp
 
 HEADERS += \
     QuwiAPI/quwiproject.h \
     QuwiAPI/quwiapi.h \
     QuwiAPI/quwiapiparser.h \
     QuwiAPI/quwicore.h \
-    maincontroller.h \
-    quwidatamodel.h \
-    quwiprojectmodel.h
+    maincontroller.h
 
 RESOURCES += qml.qrc \
     resources.qrc

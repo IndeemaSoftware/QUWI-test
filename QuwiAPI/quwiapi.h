@@ -26,6 +26,8 @@ signals:
     void loginFailed(QString);
     void logoutSucced();
 
+    void projectUpdateSucced(QString);
+
     void projectsRecived(QList<QuwiProject>*);
 
     void error(QString);

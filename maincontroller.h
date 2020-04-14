@@ -33,7 +33,8 @@ private slots:
     void logoutSucced();
 
     void projectsReceived(QList<QuwiProject>*);
-    void updateProjectName(int id);
+    void updateProjectName(int id, QString newName);
+    void updateSucced(QString);
 
     void apiCallError(QString);
 

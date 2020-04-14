@@ -54,14 +54,26 @@ Rectangle {
         visible: false
 
         onProjectPressed: {
-            console.log("We are here");
             showEditProjectView(true);
+
+            editProjectView.imageUrl = projectsView.data.get(projectsView.index).logo_url
+            editProjectView.projectName = projectsView.data.get(projectsView.index).name
+        }
+
+        onUpdateMessage: {
+            editProjectView.message = msg;
         }
     }
 
     EditProjectView {
         id: editProjectView
         visible: false
+        anchors.horizontalCenter: contentPanel.horizontalCenter
+        anchors.verticalCenter: contentPanel.verticalCenter
+
+        onUpdateProject: {
+            projectsView.updateName(projectName);
+        }
     }
 
     Rectangle {

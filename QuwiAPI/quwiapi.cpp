@@ -113,6 +113,8 @@ void QuwiAPI::handleResponse(QNetworkReply *reply)
             handleLoginResponce(lResponse);
         } else if (QString(CMD_PROJECTS).contains(getCommand(reply))) {
             emit projectsRecived(QuwiAPIParser::parseProjects(lResponse));
+        } else if (QString(CMD_PROJECT_UPDATE).contains(getCommand(reply))) {
+            emit projectUpdateSucced("Succesfuly updated");
         }
     } else {
         if (QString(CMD_LOGIN).contains(getCommand(reply))) {

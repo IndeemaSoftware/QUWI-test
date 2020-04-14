@@ -1,7 +1,5 @@
 #include "maincontroller.h"
 #include "QuwiAPI/quwiapi.h"
-#include "quwidatamodel.h"
-#include "quwiprojectmodel.h"
 
 #include <QDebug>
 #include <QRegularExpression>
@@ -28,6 +26,7 @@ MainController::MainController(QObject *parent) : QObject(parent)
     connect(mAPI, SIGNAL(logoutSucced()), this, SLOT(logoutSucced()));
 
     connect(mAPI, SIGNAL(projectsRecived(QList<QuwiProject>*)), this, SLOT(projectsReceived(QList<QuwiProject>*)));
+    connect(mAPI, SIGNAL(projectUpdateSucced(QString)), this, SLOT(updateSucced(QString)));
 
     connect(mAPI, SIGNAL(error(QString)), this, SLOT(apiCallError(QString)));
 }
@@ -37,8 +36,10 @@ void MainController::setEngine(QQmlApplicationEngine *engine)
     mEngine = engine;
     QObject *lRoot = mEngine->rootObjects()[0];
     mLoginView = lRoot->findChild<QQuickItem *>("loginView");
-    mProjectsView = lRoot->findChild<QQuickItem *>("projectsView");
     connect(mLoginView, SIGNAL(loginPressed(QString, QString)), this, SLOT(login(QString, QString)));
+
+    mProjectsView = lRoot->findChild<QQuickItem *>("projectsView");
+    connect(mProjectsView, SIGNAL(updateProjectName(int, QString)), this, SLOT(updateProjectName(int, QString)));
 }
 
 void MainController::getProjects()
@@ -102,16 +103,26 @@ void MainController::projectsReceived(QList<QuwiProject> *projectsList)
     }
 }
 
-void MainController::updateProjectName(int id)
+void MainController::updateProjectName(int id, QString name)
 {
+    qDebug() << name;
     if (mProjectList != nullptr) {
-        QModelIndex index = mModel->index(id, 1, QModelIndex());
         QuwiProject lProject = mProjectList->at(id);
-        lProject.setName(mModel->data(index).toString());
+        lProject.setName(name);
         mProjectList->replace(id, lProject);
 
         mAPI->updateProject(lProject);
     }
+}
+
+void MainController::updateSucced(QString msg)
+{
+    getProjects();
+    QMetaObject::invokeMethod(mProjectsView,
+                             "updateProjectMessage",
+                             Qt::DirectConnection,
+                             Q_ARG(QVariant, QVariant::fromValue(msg)));
+
 }
 
 void MainController::apiCallError(QString msg)

@@ -35,7 +35,9 @@ Rectangle {
     ]
 
     BorderImage {
-        id: background
+        id: background 
+        width: loginTextArea.width
+        height: loginTextArea.height
         anchors.horizontalCenter: parent.horizontalCenter
         source: "qrc:/resources/login/input.png"
     }

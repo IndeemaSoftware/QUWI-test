@@ -10,5 +10,6 @@
         <file>qml/ContentView/Login/LoginTextArea.qml</file>
         <file>qml/ContentView/Dashboard/ProjectModel.qml</file>
         <file>qml/ContentView/Dashboard/EditProjectView.qml</file>
+        <file>qml/ContentView/Dashboard/UserView.qml</file>
     </qresource>
 </RCC>
