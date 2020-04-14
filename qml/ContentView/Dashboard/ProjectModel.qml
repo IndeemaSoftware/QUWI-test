@@ -161,14 +161,17 @@ Rectangle {
     }
 
     MouseArea {
+        id: mouse
         propagateComposedEvents: true
         hoverEnabled: true
         anchors.fill: projectModel
 
         onEntered: {
+            mouse.cursorShape = Qt.PointingHandCursor
         }
 
         onExited: {
+            mouse.cursorShape = Qt.ArrowCursor
         }
 
         onPressed: {
