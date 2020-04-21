@@ -18,6 +18,10 @@ Window {
     minimumWidth: 600
     minimumHeight: 250
 
+    function updateWarningText(warning) {
+        waringView.text = warning;
+    }
+
     Column {
         anchors.topMargin: parent.topMargin
         anchors.verticalCenter: parent.verticalCenter
@@ -43,7 +47,7 @@ Window {
         ContentView {
             id: contentView
             objectName:"contentView"
-            height: mainWindow.height - topPanel.height
+            height: mainWindow.height - topPanel.height - 20
             width: mainWindow.width
 
             onLogedIn: {
@@ -54,6 +58,15 @@ Window {
             onEditProject: {
                 topPanel.projectsButtonState = "Normal"
             }
+        }
+
+        Text {
+            id: waringView
+            objectName: "warningView"
+            color: "red"
+
+            width: mainWindow.width
+            height: 20
         }
     }
 }

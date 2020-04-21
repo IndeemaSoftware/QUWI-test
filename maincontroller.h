@@ -38,6 +38,8 @@ private slots:
 
     void apiCallError(QString);
 
+    void updateWarningMessage(QString msg);
+
 signals:
     void updateProject(int);
 private:

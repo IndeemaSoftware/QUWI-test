@@ -5,6 +5,7 @@ import "./Login"
 
 Rectangle {
     id: contentPanel
+    objectName: "contentPanel"
 
     signal logedIn
     signal logedOut

@@ -62,6 +62,7 @@ void MainController::loginSucced()
                               "logedIn",
                               Qt::DirectConnection);
     getProjects();
+    updateWarningMessage("");
 }
 
 void MainController::loginFailed(QString message)
@@ -122,10 +123,20 @@ void MainController::updateSucced(QString msg)
                              "updateProjectMessage",
                              Qt::DirectConnection,
                              Q_ARG(QVariant, QVariant::fromValue(msg)));
-
+    updateWarningMessage("");
 }
 
 void MainController::apiCallError(QString msg)
-{
+{    
+    updateWarningMessage(msg);
     logout();
+}
+
+void MainController::updateWarningMessage(QString msg)
+{
+    QObject *lRoot = mEngine->rootObjects()[0];
+    QMetaObject::invokeMethod(lRoot,
+                             "updateWarningText",
+                             Qt::DirectConnection,
+                             Q_ARG(QVariant, QVariant::fromValue(msg)));
 }
